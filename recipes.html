@@ -1,12 +1,15 @@
 <script>
-
-
+/** 
+* Problem: place 9 elements in a 3x3 grid so a column or row is only filled with on kind of element. 
+* Restrictions: there are a special element (0) that is a wilcard (can act as any element) and 3 kinds of elements, each with only 3 elements available.
+* Algorithm: Place the elements in the grid (var pie). Keep track of elements still available (var ingLeft) so no more than available items are used, and once 9 elements are placed in the grid, check for columns and rows to verify if conditions are met.
+* Result: validRecipes contains the list of valid configurations
+**/
 
 var gridSize = 3;
 var ingLeft = [1, 3, 3, 3];
 var pie = [];
 var validRecipes = [];
-var countValidRecipes = 0;
 
 var isValidAlign = function(offset, step, end) {
 	var ing = pie[offset];
@@ -49,7 +52,6 @@ var placeNextIngredient = function(ingNumber) {
 			} else {
 				if( isValidRecipe() ) {
 					validRecipes.push(pie.join(""));
-					countValidRecipes++;
 				}
 			}
 			pie.pop();
@@ -60,7 +62,7 @@ var placeNextIngredient = function(ingNumber) {
 
 var currentTime = Date.now();
 placeNextIngredient(1);
-document.write("Valid recipes count= " + countValidRecipes + " (found in " + (Date.now() - currentTime) + " millis)<br/>");
+document.write("Valid recipes count= " + validRecipes.length + " (found in " + (Date.now() - currentTime) + " millis)<br/>");
 window.document.write(validRecipes.join(", ") + "<br/>");
 
 
